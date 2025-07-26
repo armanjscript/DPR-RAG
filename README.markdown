@@ -38,13 +38,11 @@ The retrieval process utilizes **Dense Passage Retrieval (DPR)** to identify the
 #### Score Normalization
 To ensure comparability and interpretability, similarity scores are normalized using the softmax function, which transforms raw scores into probabilities that sum to 1. The formula is:
 
-$$\[
-\text{norm\_scores} = \frac{e^{\text{all\_scores}}}{\sum e^{\text{all\_scores}}}
-\]$$
+$`\text{norm\_scores} = \frac{e^{\text{all\_scores}}}{\sum e^{\text{all\_scores}}}`$
 
 Where:
-- $\text{all\_scores}$ are $(1.0 - \text{distance})$ the initial similarity scores, calculated as (1.0 - $\text{distance}$), where $(\text{distance})$ is the cosine distance between query and document embeddings (ranging from 0 for identical to 1 for dissimilar).
-- The softmax function exponentiates each score ($(e^{\text{all_scores}})$) and divides by the sum of all exponentiated scores ($(\sum e^{\text{all_scores}})$), resulting in normalized scores that represent confidence levels for each document’s relevance.
+- $`\text{all\_scores}`$ are $`(1.0 - \text{distance})`$ the initial similarity scores, calculated as $`(1.0 - \text{distance})`$, where $`(\text{distance})`$ is the cosine distance between query and document embeddings (ranging from 0 for identical to 1 for dissimilar).
+- The softmax function exponentiates each score ($`(e^{\text{all\_scores}})`$) and divides by the sum of all exponentiated scores ($`(\sum e^{\text{all\_scores}})`$), resulting in normalized scores that represent confidence levels for each document’s relevance.
 
 This normalization ensures that the system prioritizes the most relevant documents, making the retrieval process reliable and transparent.
 
@@ -54,17 +52,18 @@ This normalization ensures that the system prioritizes the most relevant documen
 
 ### Diagram of the RAG Pipeline
 ```mermaid
-graph LR
-    A[User Query] --> B[DPRRetriever]
-    B --> C[Query Embedding]
-    B --> D[Vector Store (Chroma)]
-    C --> E[Similarity Search]
+flowchart LR
+    A(["User Query"])
+    A --> B["DPRRetriever"]
+    B --> C["Query Embedding"]
+    B --> D["Vector Store (Chroma)"]
+    C --> E["Similarity Search"]
     D --> E
-    E --> F[Top-k Documents]
-    F --> G[Prompt Construction]
-    G --> H[LLM (OllamaLLM)]
-    H --> I[Response Generation]
-    I --> J[Final Answer]
+    E --> F["Top-k Documents"]
+    F --> G["Prompt Construction"]
+    G --> H["LLM (OllamaLLM)"]
+    H --> I["Response Generation"]
+    I --> J["Final Answer"]
 ```
 
 This diagram can be rendered in GitHub to visualize the pipeline from query to response.
