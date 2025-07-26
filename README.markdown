@@ -84,7 +84,7 @@ Follow these steps to set up the project:
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/armanjscript/DPR-RAG
+   git clone https://github.com/armanjscript/DPR-RAG.git
    ```
 2. **Navigate to the Project Directory**:
    ```bash
